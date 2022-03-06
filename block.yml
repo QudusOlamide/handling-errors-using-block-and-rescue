@@ -1,0 +1,12 @@
+---
+- hosts: server
+  tasks:
+    - name: get file
+      block:
+        - get_url: 
+            url: "httpd://172.25.1.5/index.html"
+            dest: "/tmp/index_file"
+      rescue:
+        - debug: msg="the file doesn't exists!"
+      always:
+        - debug: msg="play done!"
